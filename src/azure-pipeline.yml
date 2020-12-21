@@ -5,7 +5,7 @@ trigger:
       - master
   paths:
     include:
-      - '/advanced_samples/AzureFunctions/DotNet'
+      - '/src/'
 
 pr:
   branches:
@@ -13,7 +13,7 @@ pr:
       - master
   paths:
     include:
-      - '/advanced_samples/AzureFunctions/DotNet'
+      - '/src/'
 
 schedules:
   - cron: '0 0 * * 0'
@@ -23,10 +23,17 @@ schedules:
         - master
     always: true
 
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: osisoft/OSI-Samples
+    endpoint: osisoft/OSI-Samples
+
 variables:
-  - template: '/miscellaneous/build_templates/variables.yml'
+  - template: '/miscellaneous/build_templates/variables.yml@templates'
   - name: projPath
-    value: '/advanced_samples/AzureFunctions/DotNet'
+    value: '/src/'
   - name: CredFile
     value: appsettings.json
   - name: CredFileLibrary
@@ -43,7 +50,7 @@ jobs:
         windows:
           imageName: windows-latest
     steps:
-      - template: '/miscellaneous/build_templates/config.yml'
+      - template: '/miscellaneous/build_templates/config.yml@templates'
         parameters:
           fileOriginal: $(CredFile)
           fileLibrary: $(CredFileLibrary)
@@ -57,7 +64,7 @@ jobs:
           testRunTitle: '$(Agent.JobName) on $(imageName)'
           workingDirectory: $(Build.SourcesDirectory)$(projPath)/
 
-  - template: '/miscellaneous/build_templates/analysis.yml'
+  - template: '/miscellaneous/build_templates/analysis.yml@templates'
     parameters:
       language: dotnet
       deleteBinSkim: '**/System.Net.Http.Formatting.dll'
