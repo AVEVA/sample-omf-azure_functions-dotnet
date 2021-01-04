@@ -2,7 +2,7 @@
 
 **Version:** 1.0.7
 
-[![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/AzureFunctions_DotNet?branchName=master)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=1743&branchName=master)
+[![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/osisoft.sample-omf-azure_functions-dotnet?repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=master)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=master)
 
 This sample uses Azure Functions and OSIsoft Message Format to send real time data from the [OpenWeather API](https://openweathermap.org/api) to OSIsoft Cloud Services. Once the Azure Function is published, every five minutes it collects current weather data for a specified list of cities, converts that data into OMF, and sends it to OCS.
 
