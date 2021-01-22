@@ -62,5 +62,5 @@ The test sends a type, container, and data message to OCS. Then, the test checks
 
 ---
 
-For the OMF landing page [ReadMe](../../../)  
-For the OSIsoft Samples landing page [ReadMe](https://github.com/osisoft/OSI-Samples)
+For the main OMF samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
+For the main OSIsoft samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples)
