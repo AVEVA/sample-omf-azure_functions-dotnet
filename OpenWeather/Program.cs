@@ -22,7 +22,9 @@ namespace OpenWeather
         public static AppSettings Settings { get; set; }
 
         [FunctionName("CurrentWeather")]
+#pragma warning disable CA1801 // Review unused parameters; this method declaration follows Azure Function examples
         public static void Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, ILogger log)
+#pragma warning restore CA1801 // Review unused parameters
         {
             _log = log;
             LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
