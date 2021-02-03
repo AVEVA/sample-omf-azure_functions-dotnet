@@ -1,5 +1,12 @@
 # Version History
 
+## 1.0.8 / 2021-01-27
+
+- Reverted to .NET Core 3.1 due to remote Azure Functions being incompatible with .NET 5.0 for now
+- Updated dependencies
+- Implemented styling guide
+- Resolved style guide warning
+
 ## 1.0.7 / 2020-12-16
 
 - Updated to .NET 5
