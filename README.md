@@ -1,15 +1,16 @@
 # Azure Functions OpenWeather Sample
 
-**Version:** 1.0.8
+**Version:** 1.0.9
 
-[![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/osisoft.sample-omf-azure_functions-dotnet?repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=master)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=master)
+[![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/osisoft.sample-omf-azure_functions-dotnet?repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=main)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&repoName=osisoft%2Fsample-omf-azure_functions-dotnet&branchName=main)
 
 This sample uses Azure Functions and OSIsoft Message Format to send real time data from the [OpenWeather API](https://openweathermap.org/api) to OSIsoft Cloud Services. Once the Azure Function is published, every five minutes it collects current weather data for a specified list of cities, converts that data into OMF, and sends it to OCS.
 
 ## Requirements
 
 The [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) is referenced in this sample, and should be installed to run the sample from the command line.
-   - Note: This sample currently uses .NET Core 3.1 and will be updated to .NET 5.0 once Microsoft has resolved compatibility issues between Azure Functions and .NET 5.0.
+
+- Note: This sample currently uses .NET Core 3.1 and will be updated to .NET 5.0 once Microsoft has resolved compatibility issues between Azure Functions and .NET 5.0.
 
 In order to run this sample as an Azure Function App, a subscription to Microsoft Azure is required. Note that the published Azure Function App may add to Azure subscription costs, so it should be stopped or deleted after use.
 
@@ -63,5 +64,5 @@ The test sends a type, container, and data message to OCS. Then, the test checks
 
 ---
 
-For the main OMF samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
-For the main OSIsoft samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples)
+For the main OMF samples page [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
+For the main OSIsoft samples page [ReadMe](https://github.com/osisoft/OSI-Samples)

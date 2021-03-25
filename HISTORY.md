@@ -1,5 +1,10 @@
 # Version History
 
+## 1.0.9 / 2021-03-25
+
+- Updated pipeline to use internal agent pool
+- Updated pipeline to reference main branch
+
 ## 1.0.8 / 2021-01-27
 
 - Reverted to .NET Core 3.1 due to remote Azure Functions being incompatible with .NET 5.0 for now
