@@ -8,8 +8,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
-    <PackageReference Include="OSIsoft.OCSClients" Version="4.0.0-prerelease-20210309.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.12" />
+    <PackageReference Include="OSIsoft.OCSClients" Version="4.0.1-prerelease-20210504.1" />
     <PackageReference Include="OSIsoft.Omf" Version="2.0.0-prerelease-20200416.3" />
     <PackageReference Include="OSIsoft.OmfIngress" Version="4.0.0-prerelease-20200512.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
