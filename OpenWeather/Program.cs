@@ -114,7 +114,7 @@ namespace OpenWeather
         private static IOmfIngressService ConfigureOcsOmf(Uri address, string tenantId, string namespaceId, string clientId, string clientSecret)
         {
             var deviceAuthenticationHandler = new AuthenticationHandler(address, clientId, clientSecret);
-            var deviceBaseOmfIngressService = new OmfIngressService(address, null, HttpCompressionMethod.None, deviceAuthenticationHandler);
+            var deviceBaseOmfIngressService = new OmfIngressService(address, HttpCompressionMethod.None, deviceAuthenticationHandler);
             return deviceBaseOmfIngressService.GetOmfIngressService(tenantId, namespaceId);
         }
 
