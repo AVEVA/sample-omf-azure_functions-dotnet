@@ -2,6 +2,10 @@
 
 ## 1.0.17 / 2021-08-10
 
+- Update pipelines to use Azure Key Vault for secrets
+
+## 1.0.17 / 2021-08-10
+
 - Updated dependencies
 - OSIsoft.OMFIngress removed ISDS Parameter
 
