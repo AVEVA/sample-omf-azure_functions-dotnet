@@ -63,6 +63,11 @@ jobs:
       demands: COMPUTERNAME -equals $(buildAgent)
     steps:
       - task: DotNetCoreCLI@2
+        displayName: 'Nuget restore'
+        inputs:
+          command: restore
+          
+      - task: DotNetCoreCLI@2
         displayName: 'Build'
         inputs:
           command: build
