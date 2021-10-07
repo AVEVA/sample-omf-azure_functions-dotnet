@@ -26,10 +26,6 @@ resources:
 
 variables:
   - template: '/miscellaneous/build_templates/variables.yml@templates'
-  - name: CredFile
-    value: appsettings.json
-  - name: CredFileLibrary
-    value: product-readiness.azurefunctions_dotnet.json
   - name: analysisProject
     value: AzureFunctions_DotNet
 
@@ -39,12 +35,19 @@ jobs:
       # TODO: Use generic agents when Azure Functions support .NET 5
       name: 00-OSIManaged-Test
       demands: COMPUTERNAME -equals $(buildAgent)
+    variables:
+      - name: OcsTenantId
+        value: $(TenantId)
+      - name: OcsNamespaceId
+        value: $(NamespaceId)
+      - name: OcsClientId
+        value: $(ClientId)
+      - name: OcsClientSecret
+        value: $(ClientSecret)
     steps:
-      - template: '/miscellaneous/build_templates/config.yml@templates'
+      - template: '/miscellaneous/build_templates/appsettings.yml@templates'
         parameters:
-          fileOriginal: $(CredFile)
-          fileLibrary: $(CredFileLibrary)
-          filePath: /OpenWeather
+          secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests'
@@ -59,6 +62,11 @@ jobs:
       name: 00-OSIManaged-Test
       demands: COMPUTERNAME -equals $(buildAgent)
     steps:
+      - task: DotNetCoreCLI@2
+        displayName: 'Nuget restore'
+        inputs:
+          command: restore
+          
       - task: DotNetCoreCLI@2
         displayName: 'Build'
         inputs:
