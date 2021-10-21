@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -8,10 +8,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
-    <PackageReference Include="OSIsoft.OCSClients" Version="4.0.3-prerelease-20210707.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.0" />
+    <PackageReference Include="OSIsoft.OCSClients" Version="4.0.4-prerelease-20211013.2" />
     <PackageReference Include="OSIsoft.Omf" Version="2.0.0-prerelease-20200416.3" />
-    <PackageReference Include="OSIsoft.OmfIngress" Version="5.0.0-prerelease-20210707.1" />
+    <PackageReference Include="OSIsoft.OmfIngress" Version="5.0.1-prerelease-20211015.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
