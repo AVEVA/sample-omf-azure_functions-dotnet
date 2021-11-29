@@ -1,5 +1,9 @@
 # Version History
 
+## 1.1.20 / 2021-12-07
+
+- Update pipelines to reference internal analysis templates
+
 ## 1.0.19 / 2021-10-21
 
 - Updated to .NET 5
