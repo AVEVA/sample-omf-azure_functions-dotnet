@@ -21,12 +21,12 @@ namespace OpenWeatherTests
             // Stream ID below must match single city defined in OpenWeatherQueries
             var streamId = $"OpenWeather_Current_San Leandro";
 
-            // OCS does not validate OMF before sending a success response, so the test must check that the messages were successful
-            using var ocsAuthenticationHandler = new AuthenticationHandler(Program.Settings.OcsUri, Program.Settings.OcsClientId, Program.Settings.OcsClientSecret);
-            var ocsSdsService = new SdsService(Program.Settings.OcsUri, null, HttpCompressionMethod.GZip, ocsAuthenticationHandler);
-            var ocsDataService = ocsSdsService.GetDataService(Program.Settings.OcsTenantId, Program.Settings.OcsNamespaceId);
-            var ocsValue = ocsDataService.GetLastValueAsync<CurrentWeather>(streamId).Result;
-            Assert.True(ocsValue.Timestamp > verifyTimestamp);
+            // ADH does not validate OMF before sending a success response, so the test must check that the messages were successful
+            using var adhAuthenticationHandler = new AuthenticationHandler(Program.Settings.AdhUri, Program.Settings.AdhClientId, Program.Settings.AdhClientSecret);
+            var adhSdsService = new SdsService(Program.Settings.AdhUri, null, HttpCompressionMethod.GZip, adhAuthenticationHandler);
+            var adhDataService = adhSdsService.GetDataService(Program.Settings.AdhTenantId, Program.Settings.AdhNamespaceId);
+            var adhValue = adhDataService.GetLastValueAsync<CurrentWeather>(streamId).Result;
+            Assert.True(adhValue.Timestamp > verifyTimestamp);
         }
 
         private class TestLogger : ILogger

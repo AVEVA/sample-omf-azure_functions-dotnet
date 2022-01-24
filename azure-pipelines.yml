@@ -40,18 +40,18 @@ jobs:
       name: 00-OSIManaged-Test
       demands: COMPUTERNAME -equals $(buildAgent)
     variables:
-      - name: OcsTenantId
+      - name: AdhTenantId
         value: $(TenantId)
-      - name: OcsNamespaceId
+      - name: AdhNamespaceId
         value: $(NamespaceId)
-      - name: OcsClientId
+      - name: AdhClientId
         value: $(ClientId)
-      - name: OcsClientSecret
+      - name: AdhClientSecret
         value: $(ClientSecret)
     steps:
       - template: '/miscellaneous/build_templates/appsettings.yml@templates'
         parameters:
-          secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey'
+          secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey, Resource'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests'

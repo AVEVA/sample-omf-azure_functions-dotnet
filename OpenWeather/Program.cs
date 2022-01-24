@@ -37,7 +37,7 @@ namespace OpenWeather
             }
 
             // Set up OMF Ingress Service
-            _omfIngressService = ConfigureOcsOmf(Settings.OcsUri, Settings.OcsTenantId, Settings.OcsNamespaceId, Settings.OcsClientId, Settings.OcsClientSecret);
+            _omfIngressService = ConfigureAdhOmf(Settings.AdhUri, Settings.AdhTenantId, Settings.AdhNamespaceId, Settings.AdhClientId, Settings.AdhClientSecret);
 
             // Send OMF Type message
             SendOmfMessage(_omfIngressService, OmfMessageCreator.CreateTypeMessage(typeof(CurrentWeather)));
@@ -99,19 +99,19 @@ namespace OpenWeather
                     OpenWeatherUri = new Uri(Environment.GetEnvironmentVariable("OPEN_WEATHER_URI")),
                     OpenWeatherKey = Environment.GetEnvironmentVariable("OPEN_WEATHER_KEY"),
                     OpenWeatherQueries = Environment.GetEnvironmentVariable("OPEN_WEATHER_QUERIES"),
-                    OcsUri = new Uri(Environment.GetEnvironmentVariable("OCS_URI")),
-                    OcsTenantId = Environment.GetEnvironmentVariable("OCS_TENANT_ID"),
-                    OcsNamespaceId = Environment.GetEnvironmentVariable("OCS_NAMESPACE_ID"),
-                    OcsClientId = Environment.GetEnvironmentVariable("OCS_CLIENT_ID"),
-                    OcsClientSecret = Environment.GetEnvironmentVariable("OCS_CLIENT_SECRET"),
+                    AdhUri = new Uri(Environment.GetEnvironmentVariable("ADH_URI")),
+                    AdhTenantId = Environment.GetEnvironmentVariable("ADH_TENANT_ID"),
+                    AdhNamespaceId = Environment.GetEnvironmentVariable("ADH_NAMESPACE_ID"),
+                    AdhClientId = Environment.GetEnvironmentVariable("ADH_CLIENT_ID"),
+                    AdhClientSecret = Environment.GetEnvironmentVariable("ADH_CLIENT_SECRET"),
                 };
             }
         }
 
         /// <summary>
-        /// Configure OCS/OMF Services
+        /// Configure ADH/OMF Services
         /// </summary>
-        private static IOmfIngressService ConfigureOcsOmf(Uri address, string tenantId, string namespaceId, string clientId, string clientSecret)
+        private static IOmfIngressService ConfigureAdhOmf(Uri address, string tenantId, string namespaceId, string clientId, string clientSecret)
         {
             var deviceAuthenticationHandler = new AuthenticationHandler(address, clientId, clientSecret);
             var deviceBaseOmfIngressService = new OmfIngressService(address, HttpCompressionMethod.None, deviceAuthenticationHandler);
@@ -132,7 +132,7 @@ namespace OpenWeather
         }
 
         /// <summary>
-        /// Sends a message to the OCS OMF endpoint
+        /// Sends a message to the ADH OMF endpoint
         /// </summary>
         private static object SendOmfMessage(IOmfIngressService service, OmfMessage omfMessage)
         {
