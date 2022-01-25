@@ -3,7 +3,7 @@
 | :loudspeaker: **Notice**: Samples have been updated to reflect that they work on AVEVA Data Hub. The samples also work on OSIsoft Cloud Services unless otherwise noted. |
 | -----------------------------------------------------------------------------------------------|  
 
-**Version:** 1.0.21
+**Version:** 1.1.0
 
 [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-azure_functions-dotnet?branchName=main)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&branchName=main)
 
@@ -27,10 +27,10 @@ In order to run this sample as an Azure Function App, a subscription to Microsof
    1. `OPEN_WEATHER_URI`, should be `https://api.openweathermap.org/data/2.5/weather` unless changed by OpenWeather
    1. `OPEN_WEATHER_KEY`, should be the API key from your OpenWeather account
    1. `OPEN_WEATHER_QUERIES`, should be a pipe-separated list of cities in the OpenWeather query format, like `San Leandro,us|Philadelphia,us|Johnson City,us|Scottsdale,us`
-   1. `ADH_URI`, should be the host specified at the beginning of the URL in the [ADH API Console](https://cloud.osisoft.com/apiconsole)
+   1. `ADH_URI`, should be the host specified at the beginning of the URL in the [ADH API Console](https://datahub.connect.aveva.com/apiconsole)
    1. `ADH_TENANT_ID`, should be the ID that comes after `/Tenants/` in the same URL
-   1. `ADH_NAMESPACE_ID`, should be the name of the ADH [Namespace](https://cloud.osisoft.com/namespaces) to receive the data
-   1. `ADH_CLIENT_ID`, should be the ID of a [Client Credentials Client](https://cloud.osisoft.com/clients). This client will need to have an OMF Connection configured to the specified Namespace in order to successfully send data. To configure one, pick "OMF" from the "Type" dropdown in the [Connections](https://cloud.osisoft.com/connections) page.
+   1. `ADH_NAMESPACE_ID`, should be the name of the ADH Namespace to receive the data
+   1. `ADH_CLIENT_ID`, should be the ID of a [Client Credentials Client](https://datahub.connect.aveva.com/clients). This client will need to have an OMF Connection configured to the specified Namespace in order to successfully send data. To configure one, pick "OMF" from the "Type" dropdown in the [Connections](https://datahub.connect.aveva.com/connections) page.
    1. `ADH_CLIENT_SECRET`, should be the secret from the Client Credentials client that was specified
 1. Consider storing `OPEN_WEATHER_KEY` and `ADH_CLIENT_SECRET` in an Azure Key Vault
    1. Create new secrets for each of these values in the Azure Key Vault

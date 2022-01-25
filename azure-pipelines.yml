@@ -48,6 +48,8 @@ jobs:
         value: $(ClientId)
       - name: AdhClientSecret
         value: $(ClientSecret)
+      - name: AdhUri
+        value: $(Resource)
     steps:
       - template: '/miscellaneous/build_templates/appsettings.yml@templates'
         parameters:
