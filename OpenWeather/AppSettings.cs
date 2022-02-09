@@ -24,32 +24,32 @@ namespace OpenWeather
         public string OpenWeatherQueries { get; set; }
         #endregion
 
-        #region OSIsoft Cloud Services
+        #region AVEVA Data Hub
 
         /// <summary>
-        /// OSIsoft Cloud Services OMF Endpoint URI
+        /// AVEVA Data Hub OMF Endpoint URI
         /// </summary>
-        public Uri OcsUri { get; set; }
+        public Uri AdhUri { get; set; }
 
         /// <summary>
-        /// OSIsoft Cloud Services Tenant ID
+        /// AVEVA Data Hub Tenant ID
         /// </summary>
-        public string OcsTenantId { get; set; }
+        public string AdhTenantId { get; set; }
 
         /// <summary>
-        /// OSIsoft Cloud Services Namespace ID
+        /// AVEVA Data Hub Namespace ID
         /// </summary>
-        public string OcsNamespaceId { get; set; }
+        public string AdhNamespaceId { get; set; }
 
         /// <summary>
-        /// OSIsoft Cloud Services Client ID
+        /// AVEVA Data Hub Client ID
         /// </summary>
-        public string OcsClientId { get; set; }
+        public string AdhClientId { get; set; }
 
         /// <summary>
-        /// OSIsoft Cloud Services Client Secret
+        /// AVEVA Data Hub Client Secret
         /// </summary>
-        public string OcsClientSecret { get; set; }
+        public string AdhClientSecret { get; set; }
         #endregion
     }
 }
