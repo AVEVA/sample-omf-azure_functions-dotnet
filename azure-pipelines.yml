@@ -36,9 +36,8 @@ variables:
 jobs:
   - job: Tests
     pool:
-      # TODO: Use generic agents when Azure Functions support .NET 5
-      name: 00-OSIManaged-Test
-      demands: COMPUTERNAME -equals $(buildAgent)
+      name: 00-OSIManaged-Containers
+      demands: Agent.OS -equals Windows_NT
     variables:
       - name: AdhTenantId
         value: $(TenantId)
