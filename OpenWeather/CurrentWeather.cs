@@ -8,9 +8,9 @@ namespace OpenWeather
     [OmfType(ClassificationType = ClassificationType.Dynamic, Name = "CurrentWeather", Description = "Current weather data for a specific location")]
     public class CurrentWeather
     {
-        public static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime Epoch = new (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public static readonly double KelvinOffset = -273.15;
-        public static readonly Random Rand = new Random();
+        public static readonly Random Rand = new ();
 
         public CurrentWeather() 
         {
@@ -46,24 +46,24 @@ namespace OpenWeather
 
             Timestamp = Epoch.AddSeconds((int)data["dt"]);
             Name = (string)data["name"];
-            var coord = data["coord"];
+            JToken coord = data["coord"];
             Latitude = (double)coord["lat"];
             Longitude = (double)coord["lon"];
-            var weather = data["weather"][0];
+            JToken weather = data["weather"][0];
             WeatherId = (int)weather["id"];
             WeatherMain = (string)weather["main"];
             WeatherDescription = (string)weather["description"];
             WeatherIcon = (string)weather["icon"];
-            var main = data["main"];
+            JToken main = data["main"];
             Humidity = (double)main["humidity"];
             Temp = Math.Round((double)main["temp"] + KelvinOffset, 3);
             TempMin = Math.Round((double)main["temp_min"] + KelvinOffset, 3);
             TempMax = Math.Round((double)main["temp_max"] + KelvinOffset, 3);
             Pressure = ((double)main["pressure"]) / 10;
-            var wind = data["wind"];
+            JToken wind = data["wind"];
             WindSpeed = (double)wind["speed"];
             WindDeg = (double)wind["deg"];
-            var clouds = data["clouds"];
+            JToken clouds = data["clouds"];
             CloudCover = (double)clouds["all"];
         }
 

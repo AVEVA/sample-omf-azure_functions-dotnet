@@ -43,21 +43,21 @@ namespace OpenWeather
             SendOmfMessage(_omfIngressService, OmfMessageCreator.CreateTypeMessage(typeof(CurrentWeather)));
 
             // Prepare OMF containers
-            var typeId = ClrToOmfTypeConverter.Convert(typeof(CurrentWeather)).Id;
-            var containers = new List<OmfContainer>();
-            var data = new Dictionary<string, IEnumerable<CurrentWeather>>();
+            string typeId = ClrToOmfTypeConverter.Convert(typeof(CurrentWeather)).Id;
+            List<OmfContainer> containers = new ();
+            Dictionary<string, IEnumerable<CurrentWeather>> data = new ();
 
-            var queries = Settings.OpenWeatherQueries.Split('|');
-            foreach (var query in queries)
+            string[] queries = Settings.OpenWeatherQueries.Split('|');
+            foreach (string query in queries)
             {
                 if (!string.IsNullOrEmpty(Settings.OpenWeatherKey))
                 {
                     // Get Current Weather Data
-                    var response = JsonConvert.DeserializeObject<JObject>(HttpGet($"{Settings.OpenWeatherUri}?q={query}&appid={Settings.OpenWeatherKey}"));
+                    JObject response = JsonConvert.DeserializeObject<JObject>(HttpGet($"{Settings.OpenWeatherUri}?q={query}&appid={Settings.OpenWeatherKey}"));
 
                     // Parse data into OMF messages
-                    var value = new CurrentWeather(response);
-                    var streamId = $"OpenWeather_Current_{value.Name}";
+                    CurrentWeather value = new (response);
+                    string streamId = $"OpenWeather_Current_{value.Name}";
                     containers.Add(new OmfContainer(streamId, typeId));
                     data.Add(streamId, new CurrentWeather[] { value });
                 }
@@ -65,7 +65,7 @@ namespace OpenWeather
                 {
                     // No key provided, generate random data
                     containers.Add(new OmfContainer(query, typeId));
-                    var value = new CurrentWeather(query);
+                    CurrentWeather value = new (query);
                     data.Add(query, new CurrentWeather[] { value });
                 }
             }
@@ -113,8 +113,8 @@ namespace OpenWeather
         /// </summary>
         private static IOmfIngressService ConfigureAdhOmf(Uri address, string tenantId, string namespaceId, string clientId, string clientSecret)
         {
-            var deviceAuthenticationHandler = new AuthenticationHandler(address, clientId, clientSecret);
-            var deviceBaseOmfIngressService = new OmfIngressService(address, HttpCompressionMethod.None, deviceAuthenticationHandler);
+            AuthenticationHandler deviceAuthenticationHandler = new (address, clientId, clientSecret);
+            OmfIngressService deviceBaseOmfIngressService = new (address, HttpCompressionMethod.None, deviceAuthenticationHandler);
             return deviceBaseOmfIngressService.GetOmfIngressService(tenantId, namespaceId);
         }
 
@@ -123,11 +123,11 @@ namespace OpenWeather
         /// </summary>
         private static string HttpGet(string url)
         {
-            var uri = new Uri(url);
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            using var response = (HttpWebResponse)request.GetResponse();
-            using var stream = response.GetResponseStream();
-            using var reader = new StreamReader(stream);
+            Uri uri = new (url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            using HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using Stream stream = response.GetResponseStream();
+            using StreamReader reader = new (stream);
             return reader.ReadToEnd();
         }
 
@@ -136,7 +136,7 @@ namespace OpenWeather
         /// </summary>
         private static object SendOmfMessage(IOmfIngressService service, OmfMessage omfMessage)
         {
-            var serializedOmfMessage = OmfMessageSerializer.Serialize(omfMessage);
+            SerializedOmfMessage serializedOmfMessage = OmfMessageSerializer.Serialize(omfMessage);
             return service.SendOmfMessageAsync(serializedOmfMessage).Result;
         }
     }
