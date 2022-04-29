@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ namespace OpenWeather
 {
     public static class Program
     {
+        private static readonly HttpClient _client = new (); 
         private static IOmfIngressService _omfIngressService;
         private static ILogger _log;
 
