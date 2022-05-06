@@ -3,7 +3,7 @@
 | :loudspeaker: **Notice**: Samples have been updated to reflect that they work on AVEVA Data Hub. The samples also work on OSIsoft Cloud Services unless otherwise noted. |
 | -----------------------------------------------------------------------------------------------|  
 
-**Version:** 1.1.2
+**Version:** 1.2.0
 
 [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-azure_functions-dotnet?branchName=main)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&branchName=main)
 
@@ -13,7 +13,7 @@ This sample uses Azure Functions and OSIsoft Message Format to send real time da
 
 The [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) is referenced in this sample, and should be installed to run the sample from the command line.
 
-- Note: This sample currently uses .NET Core 3.1 and will be updated to .NET 5.0 once Microsoft has resolved compatibility issues between Azure Functions and .NET 5.0.
+This sample uses .NET 6.0
 
 In order to run this sample as an Azure Function App, a subscription to Microsoft Azure is required. Note that the published Azure Function App may add to Azure subscription costs, so it should be stopped or deleted after use.
 

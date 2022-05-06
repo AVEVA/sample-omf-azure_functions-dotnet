@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -125,12 +126,22 @@ namespace OpenWeather
         /// </summary>
         private static string HttpGet(string url)
         {
-            Uri uri = new (url);
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            using HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            using Stream stream = response.GetResponseStream();
-            using StreamReader reader = new (stream);
-            return reader.ReadToEnd();
+            using HttpRequestMessage request = new (HttpMethod.Get, url);
+            return Send(request).Result;
+        }
+
+        /// <summary>
+        /// Send message using HttpRequestMessage
+        /// </summary>
+        private static async Task<string> Send(HttpRequestMessage request)
+        {
+            HttpResponseMessage response = await _client.SendAsync(request).ConfigureAwait(false);
+
+            string responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error sending OMF response code:{response.StatusCode}.  Response {responseString}");
+            return responseString;
         }
 
         /// <summary>
