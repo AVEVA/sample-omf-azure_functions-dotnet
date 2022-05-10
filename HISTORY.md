@@ -1,5 +1,9 @@
 # Version History
 
+## 1.2.1 / 2022-05-10
+
+- Updated dependencies
+
 ## 1.2.0 / 2022-05-06
 
 - Upgraded to .NET 6
