@@ -1,5 +1,9 @@
 # Version History
 
+## 1.2.0 / 2022-05-06
+
+- Upgraded to .NET 6
+
 ## 1.1.2 / 2022-04-15
 
 - Replaced var with explicit types
