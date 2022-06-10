@@ -1,5 +1,10 @@
 # Version History
 
+## 1.2.3 / 2022-06-10
+
+- Restored to .NET 6
+- Parameterized pipeline container demands
+
 ## 1.2.2 / 2022-06-09
 
 - Updated dependencies
