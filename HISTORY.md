@@ -1,5 +1,10 @@
 # Version History
 
+## 1.2.2 / 2022-06-09
+
+- Updated dependencies
+- Downgraded to .NET 5 due to Azure Pipeline failures
+
 ## 1.2.1 / 2022-05-10
 
 - Updated dependencies
