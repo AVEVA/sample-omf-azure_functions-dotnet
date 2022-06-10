@@ -33,11 +33,15 @@ variables:
   - name: analysisProject
     value: AzureFunctions_DotNet
 
+parameters:
+  - name: containerDemands
+    default: Agent.OS -equals Windows_NT
+
 jobs:
   - job: Tests
     pool:
       name: 00-OSIManaged-Containers
-      demands: Agent.OS -equals Windows_NT
+      demands: ${{ parameters.containerDemands }}
     variables:
       - name: AdhTenantId
         value: $(TenantId)
