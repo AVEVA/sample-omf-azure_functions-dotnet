@@ -33,11 +33,15 @@ variables:
   - name: analysisProject
     value: AzureFunctions_DotNet
 
+parameters:
+  - name: containerDemands
+    default: Agent.OS -equals Windows_NT
+
 jobs:
   - job: Tests
     pool:
       name: 00-OSIManaged-Containers
-      demands: Agent.OS -equals Windows_NT
+      demands: ${{ parameters.containerDemands }}
     variables:
       - name: AdhTenantId
         value: $(TenantId)
@@ -51,14 +55,19 @@ jobs:
         value: $(Resource)
     steps:
       - task: UseDotNet@2
-        displayName: 'Install dotnet 5'
+        displayName: 'Install dotnet 6'
         inputs:
           packageType: 'sdk'
-          version: '5.x'
+          version: '6.x'
 
       - template: '/miscellaneous/build_templates/appsettings.yml@templates'
         parameters:
           secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey, Resource'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Nuget restore'
+        inputs:
+          command: restore
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests'
@@ -71,10 +80,10 @@ jobs:
     parameters:
       buildSteps:
         - task: UseDotNet@2
-          displayName: 'Install dotnet 5'
+          displayName: 'Install dotnet 6'
           inputs:
             packageType: 'sdk'
-            version: '5.x'
+            version: '6.x'
 
         - task: DotNetCoreCLI@2
           displayName: 'Nuget restore'
