@@ -1,5 +1,10 @@
 # Version History
 
+## 1.2.4 / 2022-08-09
+
+- Add dependabot.yml to automate dependency checks
+- Remove weekly tests
+
 ## 1.2.3 / 2022-06-10
 
 - Restored to .NET 6
