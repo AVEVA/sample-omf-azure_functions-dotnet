@@ -34,13 +34,17 @@ variables:
     value: AzureFunctions_DotNet
 
 parameters:
+  - name: pool
+    default: 00-OSIManaged-Containers
   - name: containerDemands
-    default: Agent.OS -equals Windows_NT
+    type: object
+    default: ['Agent.OS -equals Windows_NT']
 
 jobs:
   - job: Tests
+    condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
-      name: 00-OSIManaged-Containers
+      name: ${{ parameters.pool }}
       demands: ${{ parameters.containerDemands }}
     variables:
       - name: AdhTenantId
