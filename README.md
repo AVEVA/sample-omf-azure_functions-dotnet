@@ -7,7 +7,7 @@
 
 [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-azure_functions-dotnet?branchName=main)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&branchName=main)
 
-This sample uses Azure Functions and OSIsoft Message Format to send real time data from the [OpenWeather API](https://openweathermap.org/api) to AVEVA Data Hub. Once the Azure Function is published, every five minutes it collects current weather data for a specified list of cities, converts that data into OMF, and sends it to ADH.
+This sample uses Azure Functions and Open Message Format to send real time data from the [OpenWeather API](https://openweathermap.org/api) to AVEVA Data Hub. Once the Azure Function is published, every five minutes it collects current weather data for a specified list of cities, converts that data into OMF, and sends it to ADH.
 
 ## Requirements
 
