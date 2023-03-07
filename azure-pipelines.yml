@@ -9,20 +9,8 @@ pr:
     include:
       - main
 
-schedules:
-  - cron: '0 0 * * 0'
-    displayName: Weekly build
-    branches:
-      include:
-        - main
-    always: true
-
 resources:
   repositories:
-    - repository: OpsGuildAutomationRepo
-      type: git
-      name: Engineering/OpsGuild.Automation
-      ref: refs/heads/main
     - repository: templates
       type: github
       name: osisoft/OSI-Samples
@@ -41,45 +29,6 @@ parameters:
     default: ['Agent.OS -equals Windows_NT']
 
 jobs:
-  - job: Tests
-    condition: ne(variables['Build.Reason'], 'Schedule')
-    pool:
-      name: ${{ parameters.pool }}
-      demands: ${{ parameters.containerDemands }}
-    variables:
-      - name: AdhTenantId
-        value: $(TenantId)
-      - name: AdhNamespaceId
-        value: $(NamespaceId)
-      - name: AdhClientId
-        value: $(ClientId)
-      - name: AdhClientSecret
-        value: $(ClientSecret)
-      - name: AdhUri
-        value: $(Resource)
-    steps:
-      - task: UseDotNet@2
-        displayName: 'Install dotnet 6'
-        inputs:
-          packageType: 'sdk'
-          version: '6.x'
-
-      - template: '/miscellaneous/build_templates/appsettings.yml@templates'
-        parameters:
-          secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey, Resource'
-
-      - task: DotNetCoreCLI@2
-        displayName: 'Nuget restore'
-        inputs:
-          command: restore
-
-      - task: DotNetCoreCLI@2
-        displayName: 'Run tests'
-        inputs:
-          command: test
-          publishTestResults: true
-          testRunTitle: '$(Agent.JobName) on $(Agent.OS)'
-
   - template: '/miscellaneous/build_templates/code-analysis.yml@templates'
     parameters:
       buildSteps:
