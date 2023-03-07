@@ -27,6 +27,11 @@ resources:
       type: github
       name: osisoft/OSI-Samples
       endpoint: osisoft/OSI-Samples
+      
+variables:
+  - template: '/miscellaneous/build_templates/variables.yml@templates'
+  - name: analysisProject
+    value: AzureFunctions_DotNet
 
 jobs:
   - template: '/miscellaneous/build_templates/code-analysis.yml@templates'
