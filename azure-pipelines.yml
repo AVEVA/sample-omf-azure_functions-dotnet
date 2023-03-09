@@ -27,26 +27,42 @@ parameters:
     default: ['Agent.OS -equals Windows_NT']
 
 jobs:
-  - template: '/miscellaneous/build_templates/code-analysis.yml@templates'
-    parameters:
-      buildSteps:
-        - task: UseDotNet@2
-          displayName: 'Install dotnet 6'
-          inputs:
-            packageType: 'sdk'
-            version: '6.x'
+  - job: Tests
+    condition: ne(variables['Build.Reason'], 'Schedule')
+    pool:
+      name: ${{ parameters.pool }}
+      demands: ${{ parameters.containerDemands }}
+    variables:
+      - name: AdhTenantId
+        value: $(TenantId)
+      - name: AdhNamespaceId
+        value: $(NamespaceId)
+      - name: AdhClientId
+        value: $(ClientId)
+      - name: AdhClientSecret
+        value: $(ClientSecret)
+      - name: AdhUri
+        value: $(Resource)
+    steps:
+      - task: UseDotNet@2
+        displayName: 'Install dotnet 6'
+        inputs:
+          packageType: 'sdk'
+          version: '6.x'
 
-        - task: DotNetCoreCLI@2
-          displayName: 'Nuget restore'
-          inputs:
-            command: restore
+      - template: '/miscellaneous/build_templates/appsettings.yml@templates'
+        parameters:
+          secrets: 'TenantId, NamespaceId, ClientId, ClientSecret, OpenWeatherKey, Resource'
 
-        - task: DotNetCoreCLI@2
-          displayName: 'Build'
-          inputs:
-            command: build
+      - task: DotNetCoreCLI@2
+        displayName: 'Nuget restore'
+        inputs:
+          command: restore
 
-        - template: '/miscellaneous/build_templates/binskim.yml@templates'
-          parameters:
-            deleteBinSkim: '**/System.Net.Http.Formatting.dll'
-            
+      - task: DotNetCoreCLI@2
+        displayName: 'Run tests'
+        inputs:
+          command: test
+          publishTestResults: true
+          testRunTitle: '$(Agent.JobName) on $(Agent.OS)'
+
