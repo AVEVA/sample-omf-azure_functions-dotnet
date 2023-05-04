@@ -1,8 +1,5 @@
 # Azure Functions OpenWeather Sample
 
-| :loudspeaker: **Notice**: Samples have been updated to reflect that they work on AVEVA Data Hub. The samples also work on OSIsoft Cloud Services unless otherwise noted. |
-| -----------------------------------------------------------------------------------------------|  
-
 **Version:** 1.2.6
 
 [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-azure_functions-dotnet?branchName=main)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2632&branchName=main)
