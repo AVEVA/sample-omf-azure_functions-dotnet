@@ -18,7 +18,7 @@ namespace OpenWeather
 {
     public static class Program
     {
-        private static readonly HttpClient _client = new (); 
+        private static readonly HttpClient _client = new(); 
         private static IOmfIngressService _omfIngressService;
         private static ILogger _log;
 
@@ -47,8 +47,8 @@ namespace OpenWeather
 
             // Prepare OMF containers
             string typeId = ClrToOmfTypeConverter.Convert(typeof(CurrentWeather)).Id;
-            List<OmfContainer> containers = new ();
-            Dictionary<string, IEnumerable<CurrentWeather>> data = new ();
+            List<OmfContainer> containers = new();
+            Dictionary<string, IEnumerable<CurrentWeather>> data = new();
 
             string[] queries = Settings.OpenWeatherQueries.Split('|');
             foreach (string query in queries)
@@ -59,7 +59,7 @@ namespace OpenWeather
                     JObject response = JsonConvert.DeserializeObject<JObject>(HttpGet($"{Settings.OpenWeatherUri}?q={query}&appid={Settings.OpenWeatherKey}"));
 
                     // Parse data into OMF messages
-                    CurrentWeather value = new (response);
+                    CurrentWeather value = new(response);
                     string streamId = $"OpenWeather_Current_{value.Name}";
                     containers.Add(new OmfContainer(streamId, typeId));
                     data.Add(streamId, new CurrentWeather[] { value });
@@ -68,7 +68,7 @@ namespace OpenWeather
                 {
                     // No key provided, generate random data
                     containers.Add(new OmfContainer(query, typeId));
-                    CurrentWeather value = new (query);
+                    CurrentWeather value = new(query);
                     data.Add(query, new CurrentWeather[] { value });
                 }
             }
@@ -116,8 +116,8 @@ namespace OpenWeather
         /// </summary>
         private static IOmfIngressService ConfigureAdhOmf(Uri address, string tenantId, string namespaceId, string clientId, string clientSecret)
         {
-            AuthenticationHandler deviceAuthenticationHandler = new (address, clientId, clientSecret);
-            OmfIngressService deviceBaseOmfIngressService = new (address, HttpCompressionMethod.None, deviceAuthenticationHandler);
+            AuthenticationHandler deviceAuthenticationHandler = new(address, clientId, clientSecret);
+            OmfIngressService deviceBaseOmfIngressService = new(address, HttpCompressionMethod.None, deviceAuthenticationHandler);
             return deviceBaseOmfIngressService.GetOmfIngressService(tenantId, namespaceId);
         }
 
@@ -126,7 +126,7 @@ namespace OpenWeather
         /// </summary>
         private static string HttpGet(string url)
         {
-            using HttpRequestMessage request = new (HttpMethod.Get, url);
+            using HttpRequestMessage request = new(HttpMethod.Get, url);
             return Send(request).Result;
         }
 
