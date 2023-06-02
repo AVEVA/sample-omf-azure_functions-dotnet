@@ -8,9 +8,9 @@ namespace OpenWeather
     [OmfType(ClassificationType = ClassificationType.Dynamic, Name = "CurrentWeather", Description = "Current weather data for a specific location")]
     public class CurrentWeather
     {
-        public static readonly DateTime Epoch = new (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public static readonly double KelvinOffset = -273.15;
-        public static readonly Random Rand = new ();
+        public static readonly Random Rand = new();
 
         public CurrentWeather() 
         {
