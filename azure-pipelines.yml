@@ -16,8 +16,6 @@ resources:
       name: AVEVA/AVEVA-Samples
       endpoint: AVEVA
 
-variables:
-
 parameters:
   - name: pool
     default: DevOps Managed Containers Build
