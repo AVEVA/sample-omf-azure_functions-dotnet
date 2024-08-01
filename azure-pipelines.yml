@@ -30,15 +30,15 @@ jobs:
       name: ${{ parameters.pool }}
       demands: ${{ parameters.containerDemands }}
     variables:
-      - name: AdhTenantId
+      - name: CdsTenantId
         value: $(TenantId)
-      - name: AdhNamespaceId
+      - name: CdsNamespaceId
         value: $(NamespaceId)
-      - name: AdhClientId
+      - name: CdsClientId
         value: $(ClientId)
-      - name: AdhClientSecret
+      - name: CdsClientSecret
         value: $(ClientSecret)
-      - name: AdhUri
+      - name: CdsUri
         value: $(Resource)
     steps:
       - task: UseDotNet@2
