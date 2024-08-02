@@ -22,9 +22,9 @@ namespace OpenWeatherTests
             string streamId = $"OpenWeather_Current_San Leandro";
 
             // ADH does not validate OMF before sending a success response, so the test must check that the messages were successful
-            using AuthenticationHandler adhAuthenticationHandler = new(Program.Settings.AdhUri, Program.Settings.AdhClientId, Program.Settings.AdhClientSecret);
-            SdsService adhSdsService = new(Program.Settings.AdhUri, null, HttpCompressionMethod.GZip, adhAuthenticationHandler);
-            ISdsDataService adhDataService = adhSdsService.GetDataService(Program.Settings.AdhTenantId, Program.Settings.AdhNamespaceId);
+            using AuthenticationHandler adhAuthenticationHandler = new(Program.Settings.CdsUri, Program.Settings.CdsClientId, Program.Settings.CdsClientSecret);
+            SdsService adhSdsService = new(Program.Settings.CdsUri, null, HttpCompressionMethod.GZip, adhAuthenticationHandler);
+            ISdsDataService adhDataService = adhSdsService.GetDataService(Program.Settings.CdsTenantId, Program.Settings.CdsNamespaceId);
             CurrentWeather adhValue = adhDataService.GetLastValueAsync<CurrentWeather>(streamId).Result;
             Assert.True(adhValue.Timestamp > verifyTimestamp);
         }

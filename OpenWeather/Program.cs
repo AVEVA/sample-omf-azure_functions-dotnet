@@ -40,7 +40,7 @@ namespace OpenWeather
             }
 
             // Set up OMF Ingress Service
-            _omfIngressService = ConfigureAdhOmf(Settings.AdhUri, Settings.AdhTenantId, Settings.AdhNamespaceId, Settings.AdhClientId, Settings.AdhClientSecret);
+            _omfIngressService = ConfigureAdhOmf(Settings.CdsUri, Settings.CdsTenantId, Settings.CdsNamespaceId, Settings.CdsClientId, Settings.CdsClientSecret);
 
             // Send OMF Type message
             SendOmfMessage(_omfIngressService, OmfMessageCreator.CreateTypeMessage(typeof(CurrentWeather)));
@@ -102,11 +102,11 @@ namespace OpenWeather
                     OpenWeatherUri = new Uri(Environment.GetEnvironmentVariable("OPEN_WEATHER_URI")),
                     OpenWeatherKey = Environment.GetEnvironmentVariable("OPEN_WEATHER_KEY"),
                     OpenWeatherQueries = Environment.GetEnvironmentVariable("OPEN_WEATHER_QUERIES"),
-                    AdhUri = new Uri(Environment.GetEnvironmentVariable("ADH_URI")),
-                    AdhTenantId = Environment.GetEnvironmentVariable("ADH_TENANT_ID"),
-                    AdhNamespaceId = Environment.GetEnvironmentVariable("ADH_NAMESPACE_ID"),
-                    AdhClientId = Environment.GetEnvironmentVariable("ADH_CLIENT_ID"),
-                    AdhClientSecret = Environment.GetEnvironmentVariable("ADH_CLIENT_SECRET"),
+                    CdsUri = new Uri(Environment.GetEnvironmentVariable("Cds_URI")),
+                    CdsTenantId = Environment.GetEnvironmentVariable("Cds_TENANT_ID"),
+                    CdsNamespaceId = Environment.GetEnvironmentVariable("Cds_NAMESPACE_ID"),
+                    CdsClientId = Environment.GetEnvironmentVariable("Cds_CLIENT_ID"),
+                    CdsClientSecret = Environment.GetEnvironmentVariable("Cds_CLIENT_SECRET"),
                 };
             }
         }
