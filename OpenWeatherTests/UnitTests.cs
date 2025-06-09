@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using OpenWeather;
 using OSIsoft.Data;
@@ -11,7 +12,7 @@ namespace OpenWeatherTests
     public class UnitTests
     {
         [Fact]
-        public void OpenWeatherTest()
+        public async Task OpenWeatherTest()
         {
             // Verify timestamp is within last minute
             DateTime verifyTimestamp = DateTime.UtcNow.AddMinutes(-10);
@@ -22,14 +23,14 @@ namespace OpenWeatherTests
             string streamId = $"OpenWeather_Current_San Leandro";
 
             // ADH does not validate OMF before sending a success response, so the test must check that the messages were successful
-            using AuthenticationHandler adhAuthenticationHandler = new(Program.Settings.CdsUri, Program.Settings.CdsClientId, Program.Settings.CdsClientSecret);
-            SdsService adhSdsService = new(Program.Settings.CdsUri, null, HttpCompressionMethod.GZip, adhAuthenticationHandler);
-            ISdsDataService adhDataService = adhSdsService.GetDataService(Program.Settings.CdsTenantId, Program.Settings.CdsNamespaceId);
-            CurrentWeather adhValue = adhDataService.GetLastValueAsync<CurrentWeather>(streamId).Result;
+            using AuthenticationHandler adhAuthenticationHandler = new(Program.Settings.Resource, Program.Settings.ClientId, Program.Settings.ClientSecret);
+            SdsService adhSdsService = new(Program.Settings.Resource, null, HttpCompressionMethod.GZip, adhAuthenticationHandler);
+            ISdsDataService adhDataService = adhSdsService.GetDataService(Program.Settings.TenantId, Program.Settings.NamespaceId);
+            CurrentWeather adhValue = await adhDataService.GetLastValueAsync<CurrentWeather>(streamId);
             Assert.True(adhValue.Timestamp > verifyTimestamp);
         }
 
-        private class TestLogger : ILogger
+        private sealed class TestLogger : ILogger
         {
             public void Log<TState>(LogLevel level, EventId eventId, TState state, Exception ex, Func<TState, Exception, string> func)
             {

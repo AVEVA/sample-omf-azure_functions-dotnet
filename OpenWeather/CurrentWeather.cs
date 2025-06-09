@@ -39,10 +39,7 @@ namespace OpenWeather
 
         public CurrentWeather(JObject data)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             Timestamp = Epoch.AddSeconds((int)data["dt"]);
             Name = (string)data["name"];

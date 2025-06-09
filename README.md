@@ -1,6 +1,6 @@
 # Azure Functions OpenWeather Sample
 
-**Version:** 1.2.7
+**Version:** 1.2.8
 
 [![Build Status](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_apis/build/status%2Fproduct-readiness%2FOMF%2FAVEVA.sample-omf-azure_functions-dotnet?repoName=AVEVA%2Fsample-omf-azure_functions-dotnet&branchName=main)](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_build/latest?definitionId=16157&repoName=AVEVA%2Fsample-omf-azure_functions-dotnet&branchName=main)
 
@@ -10,13 +10,13 @@ This sample uses Azure Functions and Open Message Format to send real time data 
 
 The [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) is referenced in this sample, and should be installed to run the sample from the command line.
 
-This sample uses .NET 6.0
+This sample uses .NET 8.0
 
 In order to run this sample as an Azure Function App, a subscription to Microsoft Azure is required. Note that the published Azure Function App may add to Azure subscription costs, so it should be stopped or deleted after use.
 
 [Sign up](https://home.openweathermap.org/users/sign_up) for an OpenWeather account, and get your free API key from the [API keys](https://home.openweathermap.org/api_keys) tab of your account. Alternately, if an API key is not provided, the app will generate random, fake data for the passed list of cities.
 
-### Running the Sample in an Azure Function App
+### Running the sample in an Azure Function App
 
 1. Open [OpenWeather.sln](OpenWeather.sln) in Microsoft Visual Studio
 1. Right click the OpenWeather project, and publish the function to your Azure subscription, see [Microsoft docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#publish-to-azure) for detailed instructions
@@ -24,19 +24,19 @@ In order to run this sample as an Azure Function App, a subscription to Microsof
    1. `OPEN_WEATHER_URI`, should be `https://api.openweathermap.org/data/2.5/weather` unless changed by OpenWeather
    1. `OPEN_WEATHER_KEY`, should be the API key from your OpenWeather account
    1. `OPEN_WEATHER_QUERIES`, should be a pipe-separated list of cities in the OpenWeather query format, like `San Leandro,us|Philadelphia,us|Johnson City,us|Scottsdale,us`
-   1. `Cds_URI`, should be the host specified at the beginning of the URL in the [Cds API Console](https://datahub.connect.aveva.com/apiconsole)
-   1. `Cds_TENANT_ID`, should be the ID that comes after `/Tenants/` in the same URL
-   1. `Cds_NAMESPACE_ID`, should be the name of the ADH Namespace to receive the data
-   1. `Cds_CLIENT_ID`, should be the ID of a [Client Credentials Client](https://datahub.connect.aveva.com/clients). This client will need to have an OMF Connection configured to the specified Namespace in order to successfully send data. To configure one, pick "OMF" from the "Type" dropdown in the [Connections](https://datahub.connect.aveva.com/connections) page.
-   1. `Cds_CLIENT_SECRET`, should be the secret from the Client Credentials client that was specified
-1. Consider storing `OPEN_WEATHER_KEY` and `Cds_CLIENT_SECRET` in an Azure Key Vault
+   1. `RESOURCE`, should be the host specified at the beginning of the URL in the [Cds API Console](https://datahub.connect.aveva.com/apiconsole)
+   1. `TENANT_ID`, should be the ID that comes after `/Tenants/` in the same URL
+   1. `NAMESPACE_ID`, should be the name of the ADH Namespace to receive the data
+   1. `CLIENT_ID`, should be the ID of a [Client Credentials Client](https://datahub.connect.aveva.com/clients). This client will need to have an OMF Connection configured to the specified Namespace in order to successfully send data. To configure one, pick "OMF" from the "Type" dropdown in the [Connections](https://datahub.connect.aveva.com/connections) page.
+   1. `CLIENT_SECRET`, should be the secret from the Client Credentials client that was specified
+1. Consider storing `OPEN_WEATHER_KEY` and `CLIENT_SECRET` in an Azure Key Vault
    1. Create new secrets for each of these values in the Azure Key Vault
    1. Enable a system-managed identity for your Azure Function App Service
    1. Grant the App Service identity access to read secrets from the Key Vault
    1. Use `@Microsoft.KeyVault(SecretUri={uri})` in the Configuration values to read them from the Key Vault at runtime
 1. Use the `Monitor` panel of the Azure Function to verify that the Azure Function App Service is working as expected, this may require configuring Application Insights first
 
-### Running the Sample locally
+### Running the sample locally
 
 1. If you have already published your Azure Function App, you can use the same "Application Settings" window from the "Publish" panel to specify "Local" values of the configuration values for your Azure Function, and run it locally using those settings
 1. Alternately, it is possible to fill in the values in [appsettings.placeholder.json](OpenWeather/appsettings.placeholder.json) with the values described above, and then rename the file to `appsettings.json`
@@ -49,7 +49,7 @@ dotnet run
 
 Note: The automated test uses the latter strategy
 
-### Running the Automated Test
+### Running the automated test
 
 To run the automated test, [appsettings.placeholder.json](OpenWeather/appsettings.placeholder.json) should be configured and renamed to `appsettings.json`. The automated test checks that a value is present for the city `San Leandro,us`, so that must be one of the cities specified in `OpenWeatherQueries`.
 

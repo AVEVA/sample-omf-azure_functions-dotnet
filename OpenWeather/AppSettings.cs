@@ -29,27 +29,27 @@ namespace OpenWeather
         /// <summary>
         /// CONNECT data services OMF Endpoint URI
         /// </summary>
-        public Uri CdsUri { get; set; }
+        public Uri Resource { get; set; }
 
         /// <summary>
         /// CONNECT data services Tenant ID
         /// </summary>
-        public string CdsTenantId { get; set; }
+        public string TenantId { get; set; }
 
         /// <summary>
         /// CONNECT data services Namespace ID
         /// </summary>
-        public string CdsNamespaceId { get; set; }
+        public string NamespaceId { get; set; }
 
         /// <summary>
         /// CONNECT data services Client ID
         /// </summary>
-        public string CdsClientId { get; set; }
+        public string ClientId { get; set; }
 
         /// <summary>
         /// CONNECT data services Client Secret
         /// </summary>
-        public string CdsClientSecret { get; set; }
+        public string ClientSecret { get; set; }
         #endregion
     }
 }
